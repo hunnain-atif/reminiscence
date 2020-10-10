@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JournalListComponent } from './pages/journal-list/journal-list.component';
+import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JournalListComponent
+    JournalListComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,
