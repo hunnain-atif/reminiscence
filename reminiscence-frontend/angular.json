@@ -145,6 +145,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "reminiscence-frontend"
+    }
+  },
+  "defaultProject": "reminiscence-frontend",
+  "cli": {
+    "analytics": "8675ed77-553b-4ee0-9f81-9f5400c1a5e7"
+  }
 }
