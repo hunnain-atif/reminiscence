@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Journal } from 'src/app/shared/journal.model';
 import { JournalsService } from 'src/app/shared/journals.service';
 
@@ -12,7 +13,7 @@ export class JournalDetailsComponent implements OnInit {
 
   journal: Journal;
 
-  constructor(private journalService: JournalsService) { }
+  constructor(private journalService: JournalsService, private router: Router) { }
 
   ngOnInit(): void {
     this.journal = new Journal();
@@ -20,6 +21,7 @@ export class JournalDetailsComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.journalService.add(form.value);
+    this.router.navigateByUrl('/');
     
   }
 
