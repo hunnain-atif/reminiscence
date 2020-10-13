@@ -75,15 +75,51 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
 export class JournalListComponent implements OnInit {
 
   journals: Journal[] = new Array<Journal>();
+  filteredJournals: Journal[] = new Array<Journal>();
 
   constructor(private journalService: JournalsService) { }
 
   ngOnInit(): void {
     this.journals = this.journalService.getAll();
+    this.filteredJournals = this.journals;
   }
 
   deleteJournal(id: number) {
     this.journalService.delete(id);
+  }
+
+  filter(query: string) {
+    let allResults: Journal[] = new Array<Journal>();
+    query = query.toLowerCase().trim();
+    let searchTerms: string[] = query.split(' ');
+    searchTerms = this.removeDuplicates(searchTerms);
+    searchTerms.forEach(searchTerm => {
+      let results = this.filterAlgorithm(searchTerm);
+      allResults = [...allResults,...results]
+    })
+    let uniqueResults = this.removeDuplicates(allResults);
+    this.filteredJournals = uniqueResults
+
+  }
+
+  removeDuplicates(arr: Array<any>): Array<any> {
+    let results: Set<any> = new Set<any>();
+    arr.forEach(e  => results.add(e));
+    return Array.from(results);
+  }
+
+  filterAlgorithm(query: string): Array<Journal> {
+    query = query.toLowerCase().trim();
+    let relevantJournals = this.journals.filter(journal => {
+      if (journal.date && journal.date.toLowerCase().includes(query)) {
+        return true;
+      } if (journal.body && journal.body.toLowerCase().includes(query)) {
+        return true 
+      }
+        return false;
+    })
+
+    return relevantJournals
   }
 
 }

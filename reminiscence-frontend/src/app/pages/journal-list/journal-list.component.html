@@ -2,7 +2,7 @@
     <div class="searchbar">
         <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Search">
+              <input class="input" type="text" (change)="filter($event.target.value)" placeholder="Search">
               <span class="icon is-small is-left">
                 <i class="fas fa-search"></i>
               </span>
@@ -12,7 +12,7 @@
 
     <div class="journal-list" [@listAnim]>
         <app-journal-card 
-        *ngFor="let journal of journals; index as i" 
+        *ngFor="let journal of filteredJournals; index as i" 
         [link]="i"
         [@itemAnim]
         (delete)="deleteJournal(i)"
