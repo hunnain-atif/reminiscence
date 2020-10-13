@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Journal } from 'src/app/shared/journal.model';
 import { JournalsService } from 'src/app/shared/journals.service';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations'
@@ -77,16 +77,26 @@ export class JournalListComponent implements OnInit {
   journals: Journal[] = new Array<Journal>();
   filteredJournals: Journal[] = new Array<Journal>();
 
+  @ViewChild('filterInput') filterInputElementRef: ElementRef<HTMLInputElement>;
+
   constructor(private journalService: JournalsService) { }
 
   ngOnInit(): void {
     this.journals = this.journalService.getAll();
-    this.filteredJournals = this.journals;
+    this.filter('');
   }
 
-  deleteJournal(id: number) {
-    this.journalService.delete(id);
+  deleteJournal(journal: Journal) {
+    let journalId = this.journalService.getId(journal)
+    this.journalService.delete(journalId);
+    this.filter(this.filterInputElementRef.nativeElement.value);
   }
+
+  // generateJournalURL(journal: Journal) {
+  //   let journalId = this.journalService.getId(journal)
+  //   console.log(journalId);
+  //   return journalId;
+  // }
 
   filter(query: string) {
     let allResults: Journal[] = new Array<Journal>();
