@@ -17,4 +17,8 @@ export class JournalListComponent implements OnInit {
     this.journals = this.journalService.getAll();
   }
 
+  deleteJournal(id: number) {
+    this.journalService.delete(id);
+  }
+
 }

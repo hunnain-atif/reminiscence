@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, Input, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, Input, AfterContentInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-journal-card',
@@ -8,6 +8,9 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2, Input, AfterConten
 export class JournalCardComponent implements OnInit {
   @Input('title') title: string;
   @Input('body') body: string;
+  @Input('link') link: string;
+
+  @Output('delete') deleteEvent: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('truncator', {static: false}) truncator: ElementRef<HTMLElement>;
   @ViewChild('bodyText', {static: false}) bodyText: ElementRef<HTMLElement>;
@@ -30,6 +33,10 @@ export class JournalCardComponent implements OnInit {
     } else {
       this.renderer.setStyle(this.truncator.nativeElement, 'display', 'none');
     }
+  }
+
+  onDelete() {
+    this.deleteEvent.emit();
   }
 
 }

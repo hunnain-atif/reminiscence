@@ -13,7 +13,8 @@
     <div class="journal-list">
         <app-journal-card 
         *ngFor="let journal of journals; index as i" 
-        [routerLink]="i"
+        [link]="i"
+        (delete)="deleteJournal(i)"
         [title]="journal.date" 
         [body]="journal.body"></app-journal-card>
     </div>
