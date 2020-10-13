@@ -7,7 +7,9 @@ import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 const routes: Routes = [
   { path: '', component: MainLayoutComponent, children: [
     {path: '', component: JournalListComponent},
+    {path: 'new', component: JournalDetailsComponent},
     {path: ':id', component: JournalDetailsComponent}
+    
   ]}
 ];
 
