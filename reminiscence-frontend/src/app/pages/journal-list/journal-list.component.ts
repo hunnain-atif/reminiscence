@@ -100,6 +100,8 @@ export class JournalListComponent implements OnInit {
     let uniqueResults = this.removeDuplicates(allResults);
     this.filteredJournals = uniqueResults
 
+    this.sortResults(allResults);
+
   }
 
   removeDuplicates(arr: Array<any>): Array<any> {
@@ -120,6 +122,28 @@ export class JournalListComponent implements OnInit {
     })
 
     return relevantJournals
+  }
+
+  sortResults(filterResults: Journal[]) {
+    let journalCountObj: Object = {}; // key:value => JournalID:count
+    filterResults.forEach(journal => {
+      let journalId = this.journalService.getId(journal);
+      if(journalCountObj[journalId]) {
+        journalCountObj[journalId] += 1;
+      } else {
+        journalCountObj[journalId] = 1
+      }
+
+    })
+    this.filteredJournals = this.filteredJournals.sort((a: Journal, b: Journal)=> {
+      let aId = this.journalService.getId(a);
+      let bId = this.journalService.getId(b);
+
+      let aCount = journalCountObj[aId];
+      let bCount = journalCountObj[bId];
+
+      return bCount - aCount;
+    })
   }
 
 }
