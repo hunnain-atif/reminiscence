@@ -29,7 +29,30 @@ import { trigger, transition, style, animate } from '@angular/animations'
           paddingRight: '*',
           paddingLeft: '*',
         })),
-        animate(68)
+        animate(70)
+      ]),
+
+      transition('* => void', [
+        animate(50, style({
+          transform: 'scale(1.05)'
+        })),
+        animate(50, style({
+          transform: 'scale(1)',
+          opacity: 0.75
+        })),
+        animate('120ms ease-out', style({
+          opacity: 0,
+          transform: 'scale(0.68)'
+        })),
+        animate('150ms ease-out', style({
+          height: 0,
+          'margin-bottom': 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+          paddingRight: 0,
+          paddingLeft: 0
+          
+        }))
       ])
     ])
   ]
