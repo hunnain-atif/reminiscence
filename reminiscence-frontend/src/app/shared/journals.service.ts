@@ -20,6 +20,10 @@ export class JournalsService {
     return this.journals.indexOf(journal);
   }
 
+  getAll() {
+    return this.journals
+  }
+
   add(journal: Journal) {
     let length = this.journals.push(journal);
     //returning index

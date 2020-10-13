@@ -11,8 +11,6 @@
     </div>
 
     <div class="journal-list">
-        <app-journal-card [title]="'JOURNAL TITLE'" [body]="'THIS IS THE BODY'"></app-journal-card>
-        <app-journal-card></app-journal-card>
-        <app-journal-card></app-journal-card>
+        <app-journal-card *ngFor="let journal of journals" title="journal.date" bdoy="journal.body"></app-journal-card>
     </div>
 </div>

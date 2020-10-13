@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Journal } from 'src/app/shared/journal.model';
+import { JournalsService } from 'src/app/shared/journals.service';
 
 @Component({
   selector: 'app-journal-list',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JournalListComponent implements OnInit {
 
-  constructor() { }
+  journals: Journal[] = new Array<Journal>();
+
+  constructor(private journalService: JournalsService) { }
 
   ngOnInit(): void {
+    this.journals = this.journalService.getAll();
   }
 
 }

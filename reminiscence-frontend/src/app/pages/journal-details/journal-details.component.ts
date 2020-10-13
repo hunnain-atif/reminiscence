@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Journal } from 'src/app/shared/journal.model';
+import { JournalsService } from 'src/app/shared/journals.service';
 
 @Component({
   selector: 'app-journal-details',
@@ -11,14 +12,15 @@ export class JournalDetailsComponent implements OnInit {
 
   journal: Journal;
 
-  constructor() { }
+  constructor(private journalService: JournalsService) { }
 
   ngOnInit(): void {
     this.journal = new Journal();
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
+    this.journalService.add(form.value);
+    
   }
 
 }
