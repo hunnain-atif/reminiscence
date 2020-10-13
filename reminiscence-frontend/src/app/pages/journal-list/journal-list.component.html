@@ -10,7 +10,7 @@
           </div>
     </div>
 
-    <div class="journal-list">
+    <div class="journal-list" [@listAnim]>
         <app-journal-card 
         *ngFor="let journal of journals; index as i" 
         [link]="i"

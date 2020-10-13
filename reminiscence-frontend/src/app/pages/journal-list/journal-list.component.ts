@@ -1,8 +1,7 @@
-import { animate, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Journal } from 'src/app/shared/journal.model';
 import { JournalsService } from 'src/app/shared/journals.service';
-import { trigger, transition, style, animate } from '@angular/animations'
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations'
 
 @Component({
   selector: 'app-journal-list',
@@ -53,6 +52,22 @@ import { trigger, transition, style, animate } from '@angular/animations'
           paddingLeft: 0
           
         }))
+      ])
+    ]),
+
+    trigger('listAnim', [
+      transition('* => *', [
+        query(':enter', [
+          style({
+            opacity: 0,
+            height: 0,
+          }),
+          stagger(100, [
+            animate('0.2s ease')
+          ])
+        ], {
+          optional: true
+        })
       ])
     ])
   ]
